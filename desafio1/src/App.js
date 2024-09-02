@@ -20,8 +20,6 @@ const App = () => {
     setCurrentNumber(prev => `${prev === '0' ? '' : prev}${number}`);
   };
 
-
-
   const handleSumNumbers = () => {
     if (firstNumber === '0'){
       setFirstNumber(String(currentNumber));
@@ -60,12 +58,57 @@ const App = () => {
     }
   };
 
+
+  const handleMultiplyNumbers = () => {
+    if (firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('*');
+      setPreviusOperation('*');
+    } else if (operation === '='){
+      const mul = Number(firstNumber) * Number(currentNumber);
+      setFirstNumber('0');
+      setCurrentNumber(String(mul));
+      setOperation('');
+      setPreviusOperation('');
+    } else {
+      const mul = Number(firstNumber) * Number(currentNumber);
+      setFirstNumber(String(mul))
+      setCurrentNumber('0');
+    }
+  };
+
+  const handleDivisionNumbers = () => {
+    if (firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('/');
+      setPreviusOperation('/');
+    } else if (operation === '='){
+      const division = Number(firstNumber) / Number(currentNumber);
+      setFirstNumber('0');
+      setCurrentNumber(String(division));
+      setOperation('');
+      setPreviusOperation('');
+    } else {
+      const division = Number(firstNumber) / Number(currentNumber);
+      setFirstNumber(String(division))
+      setCurrentNumber('0');
+    }
+  };
+
   useEffect(() => {
     if (operation === '=') {
       if (previusOperation === '+') {
         handleSumNumbers();
       } else if (previusOperation === '-') {
         handleSubtractNumbers();
+      }
+      else if (previusOperation === '*') {
+        handleMultiplyNumbers();
+      }
+      else if (previusOperation === '/') {
+        handleDivisionNumbers();
       }
     }
   });
@@ -77,6 +120,12 @@ const App = () => {
           setOperation('=');
           break;
         case '-':
+          setOperation('=');
+          break;
+        case '*':
+          setOperation('=');
+          break;
+        case '/':
           setOperation('=');
           break;
         default:
@@ -95,13 +144,13 @@ const App = () => {
           <Button label="C" onClick={handleOnClear}/>
           <Button label="<-"/>
           <Button label="%"/>
-          <Button label="/"/>
+          <Button label="/" onClick={handleDivisionNumbers}/>
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')}/>
           <Button label="8" onClick={() => handleAddNumber('8')}/>
           <Button label="9" onClick={() => handleAddNumber('9')}/>
-          <Button label="x"/>
+          <Button label="x" onClick={handleMultiplyNumbers}/>
         </Row>
         <Row>
           <Button label="4" onClick={() => handleAddNumber('4')}/>

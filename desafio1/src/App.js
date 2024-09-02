@@ -138,7 +138,6 @@ const App = () => {
   return (
     <Container>
       <Content>
-        <Input value={firstNumber} />
         <Input value={currentNumber}/>
         <Row>
           <Button label="C" onClick={handleOnClear}/>
